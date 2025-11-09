@@ -7,17 +7,17 @@ import (
 	"io"
 	"strings"
 
-	yup "github.com/gloo-foo/framework"
+	gloo "github.com/gloo-foo/framework"
 )
 
-type command yup.Inputs[yup.File, flags]
+type command gloo.Inputs[gloo.File, flags]
 
-func Uniq(parameters ...any) yup.Command {
-	return command(yup.Initialize[yup.File, flags](parameters...))
+func Uniq(parameters ...any) gloo.Command {
+	return command(gloo.Initialize[gloo.File, flags](parameters...))
 }
 
-func (p command) Executor() yup.CommandExecutor {
-	return yup.Inputs[yup.File, flags](p).Wrap(func(ctx context.Context, stdin io.Reader, stdout, stderr io.Writer) error {
+func (p command) Executor() gloo.CommandExecutor {
+	return gloo.Inputs[gloo.File, flags](p).Wrap(func(ctx context.Context, stdin io.Reader, stdout, stderr io.Writer) error {
 		scanner := bufio.NewScanner(stdin)
 		var lastLine string
 		var lastOriginal string
